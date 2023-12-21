@@ -10,12 +10,12 @@ Tested with python 3.11.7.
 - Pillow
 
 ## Consists of Modules
-- arrange_bb.py
+- `arrange_bb.py`:
   Arranges bounding boxes flush left according to given max. width.
-- bb.py
+- `bb.py`:
   Finds bounding boxes of words of text found in given image.
-- wrap_bitmap_text.py
-  Glues everything together to provide the functionality
+- `wrap_bitmap_text.py`:
+  Glues everything together to provide the functionality.
 
 ## Example
 ![image](https://github.com/bwagner/wrap_bitmap_text/assets/447049/a1d54dd0-07e8-49f3-8b70-0fbea8be2aaf)
