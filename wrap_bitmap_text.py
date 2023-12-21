@@ -35,7 +35,7 @@ def text_wrap(img_path, max_width):
     width, height = img.size
     background_color = get_bg_col(img)
 
-    _, bbs = bb.get_bbs(img_path)
+    _, bbs, text = bb.get_bbs(img_path)
     max_height = max(bbs, key=lambda x: x[3])[3]
 
     lines = arrange_bb.arrange_bounding_boxes(bbs, max_width)
@@ -46,7 +46,7 @@ def text_wrap(img_path, max_width):
 
     new_im = Image.new(
         "RGB",
-        (max_width + inter_word_space * max_words, max_height * len(bbs)),
+        (max_width + inter_word_space * max_words, max_height * len(lines)),
         background_color,
     )
 
@@ -64,10 +64,11 @@ def text_wrap(img_path, max_width):
 
     target = f"{base_name}_stacked.jpg"
     new_im.save(target)
-    return target
+    return target, text
 
 
 if __name__ == "__main__":
-    target = text_wrap(sys.argv[1], int(sys.argv[2]))
-    print(f"created {target} .")
+    target, text = text_wrap(sys.argv[1], int(sys.argv[2]))
+    print(f"created: {target} .")
+    print(f"found text: '{text}'.")
     os.system(f"open {target}")
