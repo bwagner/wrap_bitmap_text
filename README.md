@@ -25,7 +25,7 @@ Tested with python 3.11.7.
 outputs:
 
 ```console
-created: chrome_stacked.jpg .
+created: chrome_stacked.png .
 found text: 'To get future Google Chrome updates, you'll need macOS 10.15 or later. This computer is using macOS 10.14.'.
 ```
 

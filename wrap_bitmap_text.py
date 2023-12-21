@@ -62,7 +62,7 @@ def text_wrap(img_path, max_width):
 
     base_name, ext = os.path.splitext(os.path.basename(img_path))
 
-    target = f"{base_name}_stacked.jpg"
+    target = f"{base_name}_stacked{ext}"
     new_im.save(target)
     return target, text
 
