@@ -32,3 +32,15 @@ found text: 'To get future Google Chrome updates, you'll need macOS 10.15 or lat
 and generates:
 
 ![chrome_stacked](https://github.com/bwagner/wrap_bitmap_text/assets/447049/f6308ca8-baea-4e13-91a6-254b87326d57)
+
+## Contributing
+```console
+git clone https://github.com/bwagner/wrap_bitmap_text/blob/main/README.md
+cd wrap_bitmap_text
+pip install -r requirements.txt -r dev-requirements.txt
+pre-commit install
+```
+
+## Todo
+- inter word space is currently an arbitrary choice, should be calculated, e.g.
+  from the distance between adjacent bounding boxes.
