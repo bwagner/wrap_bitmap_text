@@ -1,8 +1,24 @@
 # Wrap Bitmap Text
 
-A crude implementation of text break for a text in a bitmap.
+A crude implementation of word wrap for a text in a bitmap.
 
 Tested with python 3.11.7.
+
+## Usage
+```console
+
+ Usage: wrap_bitmap_text.py [OPTIONS] FILE_PATH WIDTH
+
+╭─ Arguments ───────────────────────────────────────────────────────────────────────────╮
+│ *    file_path      TEXT     Path to the image file [required]                        │
+│ *    width          INTEGER  Max width for the resulting lines in pixels [required]   │
+╰───────────────────────────────────────────────────────────────────────────────────────╯
+╭─ Options ─────────────────────────────────────────────────────────────────────────────╮
+│ --open-image  -i        Open image after creation                                     │
+│ --output-txt  -t        Output OCR'd text on stdout                                   │
+│ --help                  Show this message and exit.                                   │
+╰───────────────────────────────────────────────────────────────────────────────────────╯
+```
 
 ## Uses
 - cv2

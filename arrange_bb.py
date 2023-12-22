@@ -26,7 +26,7 @@ def arrange_bounding_boxes(
     current_line = []
     current_width = 0
 
-    for i, (_, _, w, _) in enumerate(bounding_boxes):
+    for i, (_, _, w, *_) in enumerate(bounding_boxes):
         if current_width + w > max_width:
             # Start a new line
             if current_line:
@@ -82,7 +82,15 @@ bb_list = [
                 bb_list,
                 200,
             ),
-            [[0, 1, 2], [3, 4], [5, 6], [7, 8], [9, 10, 11, 12], [13, 14, 15], [16, 17]]
+            [
+                [0, 1, 2],
+                [3, 4],
+                [5, 6],
+                [7, 8],
+                [9, 10, 11, 12],
+                [13, 14, 15],
+                [16, 17],
+            ],
         ),
     ],
 )

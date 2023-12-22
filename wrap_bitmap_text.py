@@ -1,9 +1,13 @@
 #!/usr/bin/env python
 
+# TODO:
+# - add help output to README.md
+
 import os
 import sys
 from collections import Counter
 
+import typer
 from PIL import Image
 
 import arrange_bb
@@ -51,24 +55,53 @@ def text_wrap(img_path, max_width):
     )
 
     y_offset = 0
+    text_wrapped = ""
     for line in lines:
         x_offset = 0  # new line, start flush left
         for b in line:
-            (x, y, w, h) = bbs[b]  # get bounding box of current word
-            im = img.crop((x, y, x + w, y + h))  # crop word
-            new_im.paste(im, (x_offset, y_offset))  # paste word
-            x_offset += w + inter_word_space  # update x-offset
-        y_offset += max_height + inter_line_space  # update y-offset
+            (x, y, w, h, t) = bbs[b]  # get bounding box of current word
+            im = img.crop((x, y, x + w, y + h))
+            new_im.paste(im, (x_offset, y_offset))
+            x_offset += w + inter_word_space
+            text_wrapped += f"{t} "
+        y_offset += max_height + inter_line_space
+        text_wrapped += "\n"
 
     base_name, ext = os.path.splitext(os.path.basename(img_path))
 
     target = f"{base_name}_stacked{ext}"
     new_im.save(target)
-    return target, text
+    return target, text, text_wrapped
+
+
+def custom_help_check():
+    if "-h" in sys.argv or "-?" in sys.argv:
+        sys.argv[1] = "--help"
+
+
+def main(
+    file_path: str = typer.Argument(
+        ..., help="Path to the image file", show_default=False
+    ),
+    width: int = typer.Argument(
+        ..., help="Max width for the resulting lines in pixels", show_default=False
+    ),
+    open_img: bool = typer.Option(
+        False, "--open-image", "-i", help="Open image after creation"
+    ),
+    output_txt: bool = typer.Option(
+        False, "--output-txt", "-t", help="Output OCR'd text on stdout"
+    ),
+):
+    target, text, text_wrapped = text_wrap(file_path, width)
+    typer.echo(f"created: {target}.")
+    if output_txt:
+        typer.echo(f"found text: '{text}'.")
+        typer.echo(f"wrapped:\n{text_wrapped}")
+    if open_img:
+        os.system(f"open {target}")
 
 
 if __name__ == "__main__":
-    target, text = text_wrap(sys.argv[1], int(sys.argv[2]))
-    print(f"created: {target} .")
-    print(f"found text: '{text}'.")
-    os.system(f"open {target}")
+    custom_help_check()
+    typer.run(main)

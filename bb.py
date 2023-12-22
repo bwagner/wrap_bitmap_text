@@ -41,7 +41,13 @@ def get_bbs(
     min_y = 10_000
     max_h = -10_000
     for i in range(n_boxes):
-        (x, y, w, h) = (d["left"][i], d["top"][i], d["width"][i], d["height"][i])
+        (x, y, w, h, t) = (
+            d["left"][i],
+            d["top"][i],
+            d["width"][i],
+            d["height"][i],
+            d["text"][i],
+        )
         if w < width / 3:
             if y < min_y:
                 min_y = y
@@ -50,7 +56,7 @@ def get_bbs(
             if height_type == HeightType.MAX_HEIGHT:
                 y = 0
                 h = height
-            bbs.append((x, y, w, h))
+            bbs.append((x, y, w, h, t))
 
     if height_type == HeightType.MAX_ENCLOSING_HEIGHT:
         bbs2 = []
@@ -62,7 +68,7 @@ def get_bbs(
         bbs = bbs2
 
     if create_visualization:
-        for x, y, w, h in bbs:
+        for x, y, w, h, _ in bbs:
             cv2.rectangle(img, (x, y), (x + w, y + h), color=(0, 255, 0), thickness=2)
 
     if create_visualization:
