@@ -36,13 +36,21 @@ Tested with python 3.11.7.
 ## Example
 ![image](https://github.com/bwagner/wrap_bitmap_text/assets/447049/a1d54dd0-07e8-49f3-8b70-0fbea8be2aaf)
 
-`./wrap_bitmap_text.py chrome.png 200`
+`./wrap_bitmap_text.py -t chrome.png 200`
 
 outputs:
 
 ```console
-created: chrome_stacked.png .
+created: chrome_stacked.png.
 found text: 'To get future Google Chrome updates, you'll need macOS 10.15 or later. This computer is using macOS 10.14.'.
+wrapped:
+To get future
+Google Chrome
+updates, you'll
+need macOS
+10.15 or later. This
+computer is using
+macOS 10.14.
 ```
 
 and generates:
